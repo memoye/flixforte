@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  /* :root {
     --color-text-base: #ffffff;
     --color-text-muted: #c7d2fe;
     --color-text-inverted: #4f46e5;
@@ -11,7 +11,7 @@
     --color-button-accent: #ffffff;
     --color-button-accent-hover: #eef2ff;
     --color-button-muted: #6366f1;
-  }
+  } */
   :root {
     --color-text-base: #000000;
     --color-text-muted: #22232b;
@@ -20,5 +20,6 @@
     --color-button-accent: #000000;
     --color-button-accent-hover: #4c4f5b;
     --color-button-muted: #c3c3c3;
+    --color-border-base: #000000;
   }
 }

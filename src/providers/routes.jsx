@@ -5,7 +5,7 @@ import {
 } from "react-router-dom"
 
 import Root from "../root"
-import { HomePage } from "../pages"
+import { HomePage, MoviesPage, SeriesPage } from "../pages"
 
 const routes = createBrowserRouter([
     {
@@ -15,6 +15,14 @@ const routes = createBrowserRouter([
             {
                 index: true,
                 element: <HomePage />
+            },
+            {
+                path: 'movies',
+                element: <MoviesPage />
+            },
+            {
+                path: 'series',
+                element: <SeriesPage />
             },
         ],
     },

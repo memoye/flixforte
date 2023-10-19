@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: [
     "./index.html",
@@ -26,10 +27,19 @@ export default {
           'button-muted': 'var(--color-button-muted)',
         }
       },
+      backgroundImage: {
+        'blob': `url('./src/assets/animatedblob.gif')`,
+      },
       gradientColorStops: {
         skin: {
           hue: 'var(--color-fill)',
         }
+      },
+      borderColor: {
+        skin: {
+          base: 'var(--color-border-base)',
+          muted: 'var(--color-text-muted)',
+        },
       }
     },
   },

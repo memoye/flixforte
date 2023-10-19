@@ -1,5 +1,7 @@
+
 export const HomePage = () => {
     return (
-        <div>This is the HomePage</div>
+        <div>This is the HomePage
+        </div>
     )
 }

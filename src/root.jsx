@@ -15,7 +15,7 @@ function Root() {
                 />
             </div>
             <Header />
-            <main className='flex-auto'>
+            <main className='flex-auto z-20'>
                 <Outlet />
             </main>
             <Footer />
