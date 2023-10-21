@@ -11,17 +11,11 @@ export const HeaderActions = ({ setSearchOpen }) => {
     const user = true
 
     return (
-        <ul className="flex items-center gap-2">
-            <li className="flex items-center">
-                <button className="text-xl"
-                    onClick={ handleSearchBtn }
-                >
-                    <TbSearch />
-                </button>
-            </li>
+        <>
+
             { user ?
                 <>
-                    <li className="border-r border-r-skin-muted pr-2 flex items-center">
+                    <li className="border-r border-r-skin-muted pr-2 flex items-center -z-10">
                         <button className="text-xl">
                             { <TbBell /> || <TbBellHeart /> || <TbBellMinus /> }
 
@@ -43,6 +37,6 @@ export const HeaderActions = ({ setSearchOpen }) => {
                     </li>
                 </>
             }
-        </ul>
+        </>
     );
 }

@@ -1,4 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+function withOpacity(varName) {
+  return ({ opacityValue }) => {
+    if (opacityValue !== undefined) {
+      return `rgba(var(${varName}), ${opacityValue})`
+    }
+  }
+}
 
 export default {
   content: [
@@ -14,17 +21,19 @@ export default {
       },
       textColor: {
         skin: {
-          base: 'var(--color-text-base)',
-          muted: 'var(--color-text-muted)',
-          inverted: 'var(--color-text-inverted)',
+          base: withOpacity("--color-text-base"),
+          muted: withOpacity("--color-text-muted"),
+          inverted: withOpacity("--color-text-inverted"),
+          extreme: withOpacity("--color-fill-extreme"),
         }
       },
       backgroundColor: {
         skin: {
-          fill: 'var(--color-fill)',
-          'button-accent': 'var(--color-button-accent)',
-          'button-accent-hover': 'var(--color-button-accent-hover)',
-          'button-muted': 'var(--color-button-muted)',
+          fill: withOpacity("--color-fill"),
+          'button-accent': withOpacity("--color-button-accent"),
+          'button-muted': withOpacity("--color-button-muted"),
+          'button-accent-hover': withOpacity("--color-button-accent-hover"),
+          'fill-extreme': withOpacity("--color-fill-extreme"),
         }
       },
       backgroundImage: {
@@ -32,13 +41,13 @@ export default {
       },
       gradientColorStops: {
         skin: {
-          hue: 'var(--color-fill)',
+          hue: withOpacity("--color-fill"),
         }
       },
       borderColor: {
         skin: {
-          base: 'var(--color-border-base)',
-          muted: 'var(--color-text-muted)',
+          base: withOpacity("--color-border-base"),
+          muted: withOpacity("--color-text-muted"),
         },
       }
     },
