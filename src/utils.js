@@ -1,3 +1,5 @@
+import localforage from "localforage";
+
 export function formatDate(date, part) {
     const dateObject = new Date(date),
         year = dateObject.getFullYear(),
@@ -32,6 +34,36 @@ export function formatDate(date, part) {
     }
 }
 
+// To toggle light or dark mode
+export async function setTheme(theme) {
+    const availableThemes = ['dark', 'light'];
+    document.body.classList.remove(...availableThemes);
+
+    try {
+        const value = await localforage.setItem('preferedTheme', theme)
+        document.body.classList.add(value)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+export async function usePreferedTheme() {
+    // localforage.clear()
+    let preferedTheme = await localforage.getItem('preferedTheme')
+    console.log(preferedTheme)
+    if (preferedTheme === null) {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+
+        } else {
+
+        }
+    } else {
+        setTheme(preferedTheme)
+    }
+}
+
+setTheme(1)
+
 export function truncateString(string) {
     if (string.length <= 20) {
         return string;
@@ -40,7 +72,19 @@ export function truncateString(string) {
     }
 }
 
-
 export function stopBubbling(event) {
     event.stopPropagation();
+}
+
+// a debounce function
+export function debounce(func, wait = 100) {
+    let timer;
+
+    return (...args) => {
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+            func(...args);
+        }, wait);
+    };
 }

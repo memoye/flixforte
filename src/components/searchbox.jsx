@@ -9,21 +9,21 @@ const results = [
     // { id: '22', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
     // { id: '22d', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
     // { id: '25', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
-    { id: '2d', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
-    { id: '2dt', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
-    { id: '2a', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
-    { id: '2t', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
-    { id: '2wer', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
-    { id: '2werd', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
-    { id: '2dwee', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
-    { id: 'swer2', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
-    { id: '2dfwr', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
+    // { id: '2d', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
+    // { id: '2dt', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
+    // { id: '2a', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
+    // { id: '2t', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
+    // { id: '2wer', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
+    // { id: '2werd', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
+    // { id: '2dwee', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
+    // { id: 'swer2', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
+    // { id: '2dfwr', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
 ]
 
 export const SearchBox = ({ setSearchOpen, searchOpen }) => {
 
     const searchboxRef = useRef(null)
-    const [searching, setSearching] = useState(true)
+    const [searching, setSearching] = useState(false)
     const resultsContainerRef = useRef(null)
 
     function handleClose() {
@@ -106,6 +106,8 @@ export const SearchBox = ({ setSearchOpen, searchOpen }) => {
                         }
                     </ul>
                 }
+                <em className='m-auto w-fit block font-thin mt-5 max-w-20 text-skin-muted' role='note'>Click outside to exit search.</em>
+                {/* If user search does not match any results  */ }
                 { searching && results.length < 1 &&
                     <div className="bg-skin-fill-extreme max-w-sm w-[90vw] mx-auto text-center pb-4 px-4 rounded-b-lg "
                         onClick={ stopBubbling }

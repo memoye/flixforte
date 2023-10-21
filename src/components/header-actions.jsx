@@ -16,10 +16,11 @@ export const HeaderActions = ({ setSearchOpen }) => {
             { user ?
                 <>
                     <li className="border-r border-r-skin-muted pr-2 flex items-center -z-10">
+
                         <button className="text-xl">
                             { <TbBell /> || <TbBellHeart /> || <TbBellMinus /> }
-
                         </button>
+
                     </li>
                     <li className="pl-1">
                         <Link className="text-2xl">
@@ -37,6 +38,7 @@ export const HeaderActions = ({ setSearchOpen }) => {
                     </li>
                 </>
             }
+
         </>
     );
 }

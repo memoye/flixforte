@@ -1,9 +1,9 @@
 import { HeaderActions } from './header-actions';
 import { Link } from "react-router-dom"
 import { logo } from "../assets"
-import { Navbar, SearchBox, MobileNav } from './index';
+import { Navbar, SearchBox, MobileNav, ThemeToggle } from './index';
 import { useEffect, useRef, useState } from "react"
-import { TbMenu, TbSearch, TbX } from 'react-icons/tb';
+import { TbMenu, TbMenu2, TbSearch, TbX } from 'react-icons/tb';
 
 export const Header = () => {
 
@@ -14,35 +14,6 @@ export const Header = () => {
     function handleSearchBtn() {
         setSearchOpen(true)
     }
-
-
-    // const handleScroll = () => {
-    //     const { classList } = headerRef.current;
-    //     const isScrolled = window.scrollY > 200;
-
-    //     classList.toggle('fixed', isScrolled);
-    //     classList.toggle('shadow', window.scrollY > 20);
-    //     classList.toggle('-top-20', window.scrollY > 200);
-    //     classList.toggle('backdrop-blur-sm', window.scrollY > 200);
-    // };
-
-    // const handleScrollEnd = () => {
-    //     const { classList } = headerRef.current;
-    //     classList.remove('-top-20');
-    //     classList.add('top-0');
-    // };
-
-    // useEffect(() => {
-
-    //     window.addEventListener('scroll', handleScroll);
-    //     window.addEventListener('scrollend', handleScrollEnd);
-
-    //     // Clean up event listeners on component unmount
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //         window.removeEventListener('scrollend', handleScrollEnd);
-    //     };
-    // }, [])
 
     useEffect(() => {
         // console.time()
@@ -87,6 +58,7 @@ export const Header = () => {
                     />
                 </div>
             }
+
             { //mobile nav 
                 navOpen &&
                 <MobileNav setIsOpen={ setNavOpen } />
@@ -106,13 +78,14 @@ export const Header = () => {
                     </div>
                 </Link>
 
-
-                <Navbar
-
-                />
+                {/* desktop nav */ }
+                <Navbar />
 
 
                 <ul className="flex items-center gap-2 ">
+
+                    {/* <ThemeToggle /> */ }
+
                     <li className="flex items-center">
                         <button className="text-xl"
                             onClick={ handleSearchBtn }
@@ -122,11 +95,10 @@ export const Header = () => {
                     </li>
 
                     <HeaderActions setSearchOpen={ setSearchOpen } />
-
                     <button className={ `focus:border border-skin-base p-1 rounded-sm md:hidden` }
                         onClick={ () => setNavOpen(!navOpen) }
                     >
-                        { navOpen ? <TbX /> : <TbMenu /> }
+                        { navOpen ? <TbX /> : <TbMenu2 /> }
                     </button>
                 </ul>
             </header>

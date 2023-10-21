@@ -1,7 +1,7 @@
 export const Hero = () => {
     return (
-        <div>
-            This
-        </div>
+        <section>
+            This is the hero component
+        </section>
     )
 }
