@@ -64,6 +64,11 @@
   /* right: unset; */
 }
 
-body {
-  transition: color 500ms;
-}
+/* .custom-gradient {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgb(var(--color-fill)),
+    transparent
+  );
+} */

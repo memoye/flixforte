@@ -1,11 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+
 function withOpacity(varName) {
   return ({ opacityValue }) => {
     if (opacityValue !== undefined) {
       return `rgba(var(${varName}), ${opacityValue})`
-    }
+    } else return `rgb(var(${varName})`
   }
 }
+
+
 
 export default {
   content: [
@@ -36,20 +39,23 @@ export default {
           'fill-extreme': withOpacity("--color-fill-extreme"),
         }
       },
+
       backgroundImage: {
         'blob': `url('./src/assets/animatedblob.gif')`,
       },
-      gradientColorStops: {
-        skin: {
-          hue: withOpacity("--color-fill"),
-        }
-      },
+
       borderColor: {
         skin: {
           base: withOpacity("--color-border-base"),
           muted: withOpacity("--color-text-muted"),
         },
-      }
+      },
+
+      gradientColorStops: {
+        skin: {
+          hue: "var(--color-fill)",
+        }
+      },
     },
   },
   plugins: [

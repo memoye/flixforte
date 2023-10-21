@@ -15,7 +15,8 @@ function Root() {
                 />
             </div>
             <Header />
-            <main className='flex-auto z-20 pt-20 px-5 md:px-14'>
+            {/* <main className='flex-auto z-20 pt-20 px-5 md:px-14'> */ }
+            <main className='flex-auto z-20 px-5 md:px-14'>
                 <Outlet />
             </main>
             <Footer />
