@@ -40,9 +40,11 @@ export const Navbar = () => {
     )
 }
 
-export const MobileNav = ({ setIsOpen }) => {
+export const MobileNav = ({ setIsOpen, navOpen }) => {
 
-
+    useEffect(() => {
+        navOpen ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'scroll'
+    }, [navOpen])
 
     return (
 

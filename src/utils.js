@@ -34,35 +34,49 @@ export function formatDate(date, part) {
     }
 }
 
+
 // To toggle light or dark mode
 export async function setTheme(theme) {
     const availableThemes = ['dark', 'light'];
     document.body.classList.remove(...availableThemes);
 
     try {
-        const value = await localforage.setItem('preferedTheme', theme)
-        document.body.classList.add(value)
+        await localforage.setItem('preferredTheme', theme);
+        document.body.classList.add(availableThemes[theme]);
     } catch (err) {
-        console.log(err)
+        console.log(err);
     }
 }
 
-export async function usePreferedTheme() {
-    // localforage.clear()
-    let preferedTheme = await localforage.getItem('preferedTheme')
-    console.log(preferedTheme)
-    if (preferedTheme === null) {
+// Get the preferred theme from local storage or the user's device settings
+export async function getPreferredTheme() {
+    let preferredTheme = await localforage.getItem('preferredTheme');
+
+    if (preferredTheme === null) {
+        // If the preferred theme is not set in local storage, check the user's device settings
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-
+            preferredTheme = 0;
         } else {
-
+            preferredTheme = 1;
         }
-    } else {
-        setTheme(preferedTheme)
     }
+
+    return preferredTheme;
 }
 
-setTheme(1)
+// Set the preferred theme
+export async function setPreferredTheme() {
+
+    const preferredTheme = await getPreferredTheme();
+    await setTheme(preferredTheme);
+    return preferredTheme;
+}
+
+// Use the preferred theme
+export function usePreferredTheme() {
+    return setPreferredTheme();
+}
+
 
 export function truncateString(string) {
     if (string.length <= 20) {

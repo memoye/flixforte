@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from 'react';
-import { debounce } from './utils';
+import { useEffect, useMemo, useState } from 'react';
+import { debounce, getPreferredTheme } from './utils';
 
 const HEADER_FIXED_CLASS = 'fixed';
 
@@ -25,3 +25,16 @@ export const useHeaderPosition = (ref) => {
         };
     }, []);
 };
+
+
+
+export function useTheme() {
+    const [theme, setTheme] = useState(0);
+
+    useEffect(() => {
+        const preferredTheme = getPreferredTheme();
+        setTheme(preferredTheme);
+    }, []);
+
+    return [theme, setTheme];
+}

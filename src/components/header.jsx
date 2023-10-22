@@ -4,11 +4,12 @@ import { logo } from "../assets"
 import { Navbar, SearchBox, MobileNav, ThemeToggle } from './index';
 import { useEffect, useRef, useState } from "react"
 import { TbMenu, TbMenu2, TbSearch, TbX } from 'react-icons/tb';
+import { usePreferredTheme } from '../utils';
 
 export const Header = () => {
 
     const [searchOpen, setSearchOpen] = useState(false)
-    const [navOpen, setNavOpen] = useState(true)
+    const [navOpen, setNavOpen] = useState(false)
     const headerRef = useRef(null)
 
     function handleSearchBtn() {
@@ -16,6 +17,7 @@ export const Header = () => {
     }
 
     useEffect(() => {
+        // console.log(theme)
         // console.time()
         window.addEventListener('scroll', () => {
             headerRef.current.classList.remove('top-0')
@@ -61,7 +63,10 @@ export const Header = () => {
 
             { //mobile nav 
                 navOpen &&
-                <MobileNav setIsOpen={ setNavOpen } />
+                <MobileNav
+                    navOpen={ navOpen }
+                    setIsOpen={ setNavOpen }
+                />
             }
 
             <header ref={ headerRef } className="flex items-center transition-[top]  justify-between px-4 h-16 z-30  w-full">
@@ -84,7 +89,7 @@ export const Header = () => {
 
                 <ul className="flex items-center gap-2 ">
 
-                    {/* <ThemeToggle /> */ }
+                    <ThemeToggle />
 
                     <li className="flex items-center">
                         <button className="text-xl"

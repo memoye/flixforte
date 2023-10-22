@@ -2,14 +2,10 @@ import { Outlet } from 'react-router-dom'
 import { gradientBg } from './assets'
 import { Footer, Header } from './components'
 import { useEffect } from 'react'
-import { usePreferedTheme } from './utils'
+import { usePreferredTheme } from './utils'
 
 
 function Root() {
-
-    useEffect(() => {
-        usePreferedTheme()
-    }, [])
 
     return (
         <div className='relative bg-skin-fill overflow-x-hidden min-h-screen flex flex-col justify-between max-w-[1440px] mx-auto text-skin-base'>
