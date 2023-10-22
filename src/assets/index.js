@@ -3,8 +3,17 @@ import logo from './logo.svg'
 import blob from './animatedblob.gif'
 import noResult from './noresult.gif'
 import movieNight from './movie-night.gif'
+import emiliaKit from './emilia-kit.png'
+import elba from './elba.png'
+import samJackson from './samJackson.png'
+import table from './table.svg'
+import toggles from './toggles.svg'
+import imgNotFound from './notfound.gif'
+
 
 export {
     gradientBg, logo, blob,
-    noResult, movieNight
+    noResult, movieNight, emiliaKit,
+    elba, samJackson, table, toggles,
+    imgNotFound
 }

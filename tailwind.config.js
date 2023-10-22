@@ -18,6 +18,15 @@ export default {
   ],
   theme: {
     extend: {
+      animation: {
+        'infinite-scroll': 'infinite-scroll 25s linear infinite'
+      },
+      keyframes: {
+        'infinite-scroll': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' }
+        }
+      },
       fontFamily: {
         'sans': ['Inter', 'sans-serif'],
         'serif': ['Merriweather', 'serif'],
@@ -42,8 +51,14 @@ export default {
 
       backgroundImage: {
         'blob': `url('./src/assets/animatedblob.gif')`,
+        'table': `url('./src/assets/table.svg')`
       },
-
+      dropShadow: {
+        glow: [
+          "0 0px 20px rgba(240, 230, 140, 0.35)",
+          "0 0px 65px rgba(240, 230, 140, 0.2)"
+        ]
+      },
       borderColor: {
         skin: {
           base: withOpacity("--color-border-base"),

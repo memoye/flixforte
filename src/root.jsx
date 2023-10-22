@@ -1,8 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { gradientBg } from './assets'
 import { Footer, Header } from './components'
-import { useEffect } from 'react'
-import { usePreferredTheme } from './utils'
+
 
 
 function Root() {
@@ -18,8 +17,8 @@ function Root() {
             </div>
 
             <Header />
-            {/* <main className='flex-auto z-20 pt-20 px-5 md:px-14'> */ }
-            <main className='flex-auto z-20 px-5 md:px-14'>
+
+            <main className='flex-auto z-20 px-5 md:px-14 max-w-[1200px] mx-auto'>
                 <Outlet />
             </main>
             <Footer />
