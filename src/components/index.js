@@ -4,4 +4,6 @@ export { SearchBox } from './searchbox'
 export { Navbar, MobileNav } from './navbar'
 export { Hero } from './hero-section'
 export { ThemeToggle } from './theme-toggle'
-
+export { MediaCard } from './media-card'
+export { Watchlists } from './watchlist'
+export { Section } from './section'

@@ -4,10 +4,8 @@ import { logo } from "../assets"
 import { Navbar, SearchBox, MobileNav, ThemeToggle } from './index';
 import { useEffect, useRef, useState } from "react"
 import { TbMenu, TbMenu2, TbSearch, TbX } from 'react-icons/tb';
-import { usePreferredTheme } from '../utils';
 
 export const Header = () => {
-
     const [searchOpen, setSearchOpen] = useState(false)
     const [navOpen, setNavOpen] = useState(false)
     const headerRef = useRef(null)
@@ -17,17 +15,13 @@ export const Header = () => {
     }
 
     useEffect(() => {
-        // console.log(theme)
-        // console.time()
         window.addEventListener('scroll', () => {
             headerRef.current.classList.remove('top-0')
 
             if (window.scrollY > 70) {
-                headerRef.current.classList.add('fixed')
-                headerRef.current.classList.add('backdrop-blur-sm')
-                headerRef.current.classList.add('-top-20')
+                headerRef.current.classList.add('fixed', 'backdrop-blur-lg', 'backdrop-brightness-90', '-top-20')
             } else {
-                headerRef.current.classList.remove('fixed')
+                headerRef.current.classList.remove('fixed', 'backdrop-brightness-90')
             }
 
             if (window.scrollY > 20) {
@@ -38,7 +32,7 @@ export const Header = () => {
 
             if (window.scrollY > 200) {
                 headerRef.current.classList.add('-top-20')
-                headerRef.current.classList.add('backdrop-blur-sm')
+                //     headerRef.current.classList.add('backdrop-blur-lg')
             }
         })
 
@@ -46,13 +40,12 @@ export const Header = () => {
             headerRef.current.classList.remove('-top-20')
             headerRef.current.classList.add('top-0')
         })
-        // console.timeEnd()
     }, [])
 
     return (
         <>
             { searchOpen &&
-                <div className='w-screen h-screen fixed z-40'
+                <div className='w-screen h-screen fixed z-40  '
                 >
                     <SearchBox
                         setSearchOpen={ setSearchOpen }
@@ -61,15 +54,14 @@ export const Header = () => {
                 </div>
             }
 
-            { //mobile nav 
-                navOpen &&
+            { navOpen &&
                 <MobileNav
                     navOpen={ navOpen }
                     setIsOpen={ setNavOpen }
                 />
             }
 
-            <header ref={ headerRef } className="flex items-center transition-[top]  justify-between px-4 h-16 z-30  w-full">
+            <header ref={ headerRef } className="flex items-center transition-[top] justify-between px-4 h-16 z-30  w-full">
                 <Link className="flex gap-1 items-center font-black font-serif text-2xl group">
                     <div>
                         <img
@@ -91,7 +83,7 @@ export const Header = () => {
 
                     <ThemeToggle />
 
-                    <li className="flex items-center">
+                    <li className="flex items-center ">
                         <button className="text-xl"
                             onClick={ handleSearchBtn }
                         >

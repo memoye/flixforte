@@ -51,7 +51,8 @@ export default {
 
       backgroundImage: {
         'blob': `url('./src/assets/animatedblob.gif')`,
-        'table': `url('./src/assets/table.svg')`
+        'table': `url('./src/assets/table.svg')`,
+        'not-found': 'url(./src/assets/notfound.gif)'
       },
       dropShadow: {
         glow: [

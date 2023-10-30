@@ -1,5 +1,5 @@
 import { CiDark, CiLight } from 'react-icons/ci'
-import { getPreferredTheme, setPreferredTheme, setTheme } from '../utils'
+import { getPreferredTheme, setTheme, usePreferredTheme } from '../utils'
 import { useEffect, useState } from 'react'
 import { useTheme } from '../hooks';
 
@@ -14,13 +14,13 @@ export const ThemeToggle = () => {
 
 
     useEffect(() => {
-        setPreferredTheme()
+        usePreferredTheme()
     }, [])
 
 
     return (
         <button
-            className={ `bg-transparent hover:bg-skin-button-muted bg-opacity-30 rounded-full p-2 text-2xl` }
+            className={ `bg-transparent hover:bg-skin-button-muted bg-opacity-30 rounded-md p-1 text-2xl ml-1` }
             onClick={ toggleTheme }
         >
             { currentTheme === 1 ? <CiDark /> : <CiLight /> }
