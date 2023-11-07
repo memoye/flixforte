@@ -5,7 +5,7 @@ export const HeroImg = () => {
         <div className="relative w-fit h-fit my-4 p-5 scale-90 rotate-1 mx-auto">
             <img draggable={ false } className='tableSvg' src={ table } alt="table" />
 
-            <div className="absolute -rotate-2 mask-x top-1/2 w-full -translate-y-1/2 inline-flex flex-nowrap">
+            <div className="absolute -rotate-2 mask-x top-1/2 w-full -translate-y-1/2 inline-flex flex-nowrap no-scrollbar">
                 <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none">
                     <li>
                         <img draggable={ false } src={ toggles } alt="/" />
