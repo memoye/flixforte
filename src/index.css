@@ -60,7 +60,7 @@
 }
 
 .mask-x {
-  overflow: hidden;
+  overflow-x: scroll;
   -webkit-mask: linear-gradient(
     90deg,
     transparent,

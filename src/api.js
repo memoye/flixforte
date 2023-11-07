@@ -1,33 +1,55 @@
-import localforage from "localforage";
-import { fetchData } from "./utils";
+import axios from 'axios';
+import localforage from 'localforage';
 
-const baseUrl = import.meta.VITE_TMDB_BASE_URL
+const apiKey = import.meta.env.VITE_TMDB_KEY;
 
-export const getMovies = async (endpoint, options = {}) => {
-    const url = `${baseUrl}/${endpoint}`; // Combine the base URL with the endpoint
+export const getMovies = async (endpoint) => {
+
+    const cacheKey = `moviesCache:https://api.themoviedb.org/3${endpoint}`;
+    const options = {
+        method: 'GET',
+        url: `https://api.themoviedb.org/3${endpoint}`,
+        params: {
+            language: 'en-US',
+            api_key: apiKey, // Include your API key as a query parameter
+        },
+        headers: {
+            accept: 'application/json',
+        }
+    }
 
     try {
-
         // Check if the data is cached
-        const cachedData = await localforage.getItem(url);
+        const cachedData = await localforage.getItem(cacheKey);
 
         if (cachedData) {
-            return cachedData;
-        } else {
-            // If not cached, make an API request using fetch with provided options
-            const response = await fetch(url, options);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            // Check if the cached data has expired
+            const cacheExpiration = await localforage.getItem(`${cacheKey}:expiration`);
+            if (cacheExpiration && Date.now() < cacheExpiration) {
+                return cachedData;
+            } else {
+                // Data has expired, remove it from the cache
+                await localforage.removeItem(cacheKey);
+                await localforage.removeItem(`${cacheKey}:expiration`);
             }
-
-            const responseData = await response.json();
-
-            // Cache the response data
-            await localforage.setItem(url, responseData);
-
-            return responseData;
         }
+
+        // If not cached or data has expired, make an API request using Axios with provided options
+        const response = await axios(options);
+
+        if (response.status !== 200) {
+            throw new Error('Network response was not ok');
+        }
+
+        const responseData = response.data;
+
+        // Cache the response data with a specified expiration time (e.g., 1 hour)
+        const expirationTime = Date.now() + 3600000; // 1 hour in milliseconds
+        await localforage.setItem(cacheKey, responseData);
+        await localforage.setItem(`${cacheKey}:expiration`, expirationTime);
+
+        return responseData;
     } catch (err) {
         throw err;
     }
-}
+};

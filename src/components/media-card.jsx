@@ -23,9 +23,9 @@ const sample = {
     "vote_count": 447
 }
 
-const { adult, backdrop_path, genre_ids, id, original_language, original_title, overview, popularity, poster_path, release_date, title, video, vote_average, vote_count } = sample
+// const { adult, backdrop_path, genre_ids, id, original_language, original_title, overview, popularity, poster_path, release_date, title, video, vote_average, vote_count } = sample
 
-export const MediaCard = () => {
+export const MediaCard = ({ adult, backdrop_path, genre_ids, id, original_language, original_title, overview, popularity, poster_path, release_date, title, video, vote_average, vote_count }) => {
 
     const [like, setLike] = useState(false)
     // https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg
@@ -34,7 +34,7 @@ export const MediaCard = () => {
 
     return (
         // <div className="relative  w-fit">
-        <div className="relative max-w-xs rounded-3xl overflow-hidden hover:shadow-2xl md:hover:scale-105 md:focus:scale-105 transition-transform hover:-translate-y-4 ">
+        <div className="carousel-item relative max-w-xs rounded-3xl overflow-hidden hover:shadow-2xl md:hover:scale-105 md:focus:scale-105 transition-transform hover:-translate-y-4 ">
             <img className="min-h-[420px] bg-not-found bg-center bg-contain bg-skin-fill-extreme bg-no-repeat" src={ `https://image.tmdb.org/t/p/original${poster_path}` } alt={ original_title } />
 
             {/*buttons*/ }
@@ -59,12 +59,12 @@ export const MediaCard = () => {
                         }
                     </button> */
                 }
-                { !adult && <div className="bg-skin-button-muted px-2 py-1 rounded-lg">18+</div> }
+                { adult && <div className="bg-skin-button-muted px-2 py-1 rounded-lg">18+</div> }
             </div>
 
             <div className="flex justify-between bg-gradient-to-t from-black via-black to-transparent items-center absolute bottom-0 inset-x-0 p-6 font-thin text-white">
                 <div className="">
-                    <p>{ release_date.slice(0, 4) }</p>
+                    <p>{ release_date?.slice(0, 4) }</p>
 
                     <p className="font-bold">⭐{ vote_average }</p>
                     <p>{ vote_count } Ratings</p>

@@ -8,8 +8,6 @@ function withOpacity(varName) {
   }
 }
 
-
-
 export default {
   content: [
     "./index.html",
@@ -76,6 +74,7 @@ export default {
   },
   plugins: [
     require('preline/plugin'),
+    require("daisyui")
   ],
 }
 

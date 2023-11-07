@@ -18,7 +18,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: 'movies',
-                element: <MoviesPage />
+                element: <MoviesPage />,
             },
             {
                 path: 'series',
