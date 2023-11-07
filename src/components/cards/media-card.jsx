@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { TbHeartFilled, TbHeartPlus, TbPlaylistAdd } from "react-icons/tb"
-import { Watchlists } from "./watchlist"
+import { Watchlists } from "../others/watchlist"
 
 const sample = {
     "adult": false,

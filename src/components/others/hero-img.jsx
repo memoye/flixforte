@@ -1,4 +1,4 @@
-import { elba, emiliaKit, samJackson, table, toggles } from "../assets"
+import { elba, emiliaKit, samJackson, table, toggles } from "../../assets"
 
 export const HeroImg = () => {
     return (

@@ -1,7 +1,7 @@
 import { HeaderActions } from './header-actions';
 import { Link } from "react-router-dom"
-import { logo } from "../assets"
-import { Navbar, SearchBox, MobileNav, ThemeToggle } from './index';
+import { logo } from "../../assets"
+import { Navbar, SearchBox, MobileNav, ThemeToggle } from '../index';
 import { useEffect, useRef, useState } from "react"
 import { TbMenu, TbMenu2, TbSearch, TbX } from 'react-icons/tb';
 

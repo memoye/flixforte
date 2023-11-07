@@ -1,6 +1,6 @@
 import { TbArrowRight } from "react-icons/tb"
-import { useMoviesCategory } from "../hooks/tmdbApi"
-import { MediaCard } from "./media-card"
+import { useMoviesCategory } from "../../hooks/tmdbApi"
+import { MediaCard } from "../cards/media-card"
 
 
 export const Section = ({ title, endpoint }) => {

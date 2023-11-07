@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useEffect, useRef } from "react"
 import { TbSearch, TbLoader } from "react-icons/tb"
-import { formatDate, stopBubbling, truncateString } from '../utils'
-import { noResult } from "../assets"
+import { formatDate, stopBubbling, truncateString } from '../../utils'
+import { noResult } from "../../assets"
 
 const results = [
     // { id: '12', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },
@@ -46,8 +46,6 @@ export const SearchBox = ({ setSearchOpen, searchOpen }) => {
         })
 
     }, [])
-
-
 
     return (
         <form>
