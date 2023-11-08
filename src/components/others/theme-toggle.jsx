@@ -1,5 +1,5 @@
 import { CiDark, CiLight } from 'react-icons/ci'
-import { getPreferredTheme, setTheme, usePreferredTheme } from '../../utils'
+import { getPreferredTheme, setTheme, usePreferredTheme } from '../../utils/misc_utils'
 import { useEffect, useState } from 'react'
 import { useTheme } from '../../hooks';
 

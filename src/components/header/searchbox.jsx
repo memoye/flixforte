@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useEffect, useRef } from "react"
 import { TbSearch, TbLoader } from "react-icons/tb"
-import { formatDate, stopBubbling, truncateString } from '../../utils'
+import { formatDate, stopBubbling, truncateString } from '../../utils/misc_utils'
 import { noResult } from "../../assets"
 
 const results = [
@@ -34,15 +34,15 @@ export const SearchBox = ({ setSearchOpen, searchOpen }) => {
     useEffect(() => {
         searchboxRef.current.focus()
         resultsContainerRef?.current?.addEventListener('scrollend', (event) => {
-            event.target.classList.add('mask')
+            event.target.classList.add('custom-mask')
         })
 
         resultsContainerRef?.current?.addEventListener('scroll', (event) => {
-            event.target.classList.remove('mask')
+            event.target.classList.remove('custom-mask')
         })
 
         resultsContainerRef?.current?.addEventListener('hover', (event) => {
-            event.target.classList.remove('mask')
+            event.target.classList.remove('custom-mask')
         })
 
     }, [])
@@ -86,7 +86,7 @@ export const SearchBox = ({ setSearchOpen, searchOpen }) => {
                             <li key={ id }
                                 onMouseOver={ () => {
                                     if (index + 1 === results.length) {
-                                        resultsContainerRef.current.classList.remove('mask')
+                                        resultsContainerRef.current.classList.remove('custom-mask')
                                     }
                                 } }
                                 className={ `bg-skin-fill-extreme mt-[1px] max-w-sm w-[90vw] mx-auto px-4 flex items-center justify-between hover:scale-105 active:scale-95 hover:rounded transition-transform hover:shadow hover:cursor-pointer py-4 shadow-lg  ${index + 1 == results.length ? 'rounded-b-xl' : ''}` }

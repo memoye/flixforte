@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getPreferredTheme } from './utils';
+import { getPreferredTheme } from './utils/misc_utils';
 
 export function useTheme() {
     const [theme, setTheme] = useState(0);

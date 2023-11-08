@@ -5,7 +5,7 @@ import {
 } from "react-router-dom"
 
 import Root from "../root"
-import { HomePage, MoviesPage, SeriesPage } from "../pages"
+import { HomePage, MoviesPage, SeriesPage, SignInPage } from "../pages"
 
 const routes = createBrowserRouter([
     {
@@ -26,6 +26,10 @@ const routes = createBrowserRouter([
             },
         ],
     },
+    {
+        path: 'login',
+        element: <SignInPage />
+    }
 ]);
 
 export default () => <RouterProvider router={ routes } />

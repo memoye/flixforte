@@ -9,11 +9,12 @@ import samJackson from './samJackson.png'
 import table from './table.svg'
 import toggles from './toggles.svg'
 import imgNotFound from './notfound.gif'
-
+import tmdbLong from './tmdb_long.svg'
+import tmdbSquare from './tmdb_square.svg'
 
 export {
     gradientBg, logo, blob,
     noResult, movieNight, emiliaKit,
     elba, samJackson, table, toggles,
-    imgNotFound
+    imgNotFound, tmdbLong, tmdbSquare
 }
