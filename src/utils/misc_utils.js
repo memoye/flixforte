@@ -1,3 +1,8 @@
+
+import localforage from "localforage";
+
+export const apprx = Math.round
+
 export function roundToNearestHalf(value) {
     // Get the integer part of the value
     const integerPart = Math.floor(value);
@@ -15,8 +20,6 @@ export function roundToNearestHalf(value) {
         return integerPart;
     }
 }
-
-import localforage from "localforage";
 
 export function formatDate(date, part) {
     const dateObject = new Date(date),
@@ -107,15 +110,23 @@ export function debounce(func, wait = 100) {
 }
 
 export function truncateString(str) {
-    if (str.length > 22) {
+    if (str.length > 25) {
         return {
             truncated: true,
-            str: str.slice(0, 22) + '...'
-        } // Truncate to 18 characters and add '...' to indicate truncation
+            str: str.slice(0, 25) + '...'
+        } // Truncate and add '...' to indicate truncation
     } else {
         return {
             truncated: false,
             str,
-        }; // Return the original string if it's 21 characters or less
+        }; // Return the original string if less
     }
+}
+
+export function isReleased(dateString) {
+    const currentDate = new Date();
+    const inputDate = new Date(dateString);
+
+    // Compare the input date with the current date
+    return inputDate < currentDate;
 }
