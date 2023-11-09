@@ -18,8 +18,6 @@ const sections = [
 
 export const HomePage = () => {
 
-
-
     return (
         <div>
             <Hero />

@@ -7,7 +7,8 @@ import { ImageModal, TrailerModal } from "./modal"
 export const MediaCard = ({ adult, backdrop_path, genre_ids, id, original_language, original_title, overview, popularity, poster_path, release_date, title, video, vote_average, vote_count }) => {
 
     const comingSoon = !isReleased(release_date)
-    const [like, setLike] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
     const { truncated, str: dispTitle } = truncateString(title)
 
 
@@ -32,7 +33,10 @@ export const MediaCard = ({ adult, backdrop_path, genre_ids, id, original_langua
                         <button
                             value={ id }
                             className="btn btn-circle btn-secondary ml-auto"
-                            onClick={ () => document.getElementById(`trailer_modal_${id}`).showModal() }
+                            onClick={ async () => {
+                                await setIsModalOpen(true)
+                                document.getElementById(`trailer_modal_${id}`).showModal()
+                            } }
                         >
                             <TbPlayerPlay className="m-0 mx-auto text-3xl" />
                         </button>
@@ -78,9 +82,11 @@ export const MediaCard = ({ adult, backdrop_path, genre_ids, id, original_langua
             <TrailerModal
                 movie_id={ id }
                 title={ original_title }
+                modalControl={ { isModalOpen, setIsModalOpen } }
             />
             <ImageModal
                 id={ id }
+                modalControl={ { isModalOpen, setIsModalOpen } }
                 img_path={ poster_path }
                 title={ original_title }
             />

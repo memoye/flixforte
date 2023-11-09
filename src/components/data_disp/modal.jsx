@@ -1,28 +1,36 @@
-export const TrailerModal = ({ movie_id, title }) => {
+
+import { useVideosData } from "../../hooks/tmdbApi"
+
+export const TrailerModal = ({ movie_id, title, modalControl }) => {
+    const { isModalOpen, setIsModalOpen } = modalControl
+    // const { data, isLoading } = useVideosData('11')
+
+    // const Videos = data?.data?.results?.filter(video => video?.site.toLowerCase() === "youtube")
+
     return (
         <div>
             {/* <button className="btn">open modal</button> */ }
             <dialog id={ `trailer_modal_${movie_id}` } className="modal">
                 <div className="modal-box p-2 lg:max-w-[65%] md:max-w-[80%] sm:max-w-screen-sm">
-                    {/* { movie_id } */ }
-                    <iframe
+                    { (isModalOpen && <iframe
                         class="w-full aspect-video rounded-lg"
-                        src="https://www.youtube.com/embed/6AQPaSJOQ7o"
+                        src={ `https://www.youtube.com/embed/6AQPaSJOQ7o` }
                         title={ title }
                         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
-                    />
+                    />) }
                 </div>
                 <p className="py-4">Press ESC key or click outside to close</p>
                 <form method="dialog" className="modal-backdrop h-screen backdrop-blur">
-                    <button>close</button>
+                    <button onClick={ () => setIsModalOpen(false) }>close</button>
                 </form>
             </dialog>
         </div>
     )
 }
 
-export const ImageModal = ({ id, img_path, title }) => {
+export const ImageModal = ({ id, img_path, title, modalControl }) => {
+
     return (
         <div>
             {/* <button className="btn">open modal</button> */ }
