@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    /* -color-text-inverted: 255, 35, 43; */
-    --color-text-base: 0, 0, 0;
+/* @layer base {
+  :root { */
+/* -color-text-inverted: 255, 35, 43; */
+/* --color-text-base: 0, 0, 0;
     --color-text-muted: 34, 35, 43;
     --color-text-inverted: 176, 176, 176;
     --color-fill: 187, 187, 187;
@@ -14,20 +14,22 @@
     --color-button-accent-hover: 76, 79, 91;
     --color-button-muted: 195, 195, 195;
     --color-border-base: 0, 0, 0;
-  }
+  } */
 
+/*
   .dark {
-    --color-text-base: 255, 255, 255; /* White text */
-    --color-text-muted: 200, 200, 200; /* Light gray text */
-    --color-text-inverted: 0, 0, 0; /* Black text */
-    --color-fill: 34, 34, 34; /* A dark background color */
-    --color-fill-extreme: 0, 0, 0; /* An even darker background color */
-    --color-button-accent: 255, 255, 255; /* White button text */
-    --color-button-accent-hover: 200, 200, 200; /* Light gray button text on hover */
-    --color-button-muted: 100, 100, 100; /* A slightly darker gray for muted buttons */
-    --color-border-base: 255, 255, 255; /* White borders */
+    --color-text-base: 255, 255, 255; /* White text *
+    --color-text-muted: 200, 200, 200; /* Light gray text *
+    --color-text-inverted: 0, 0, 0; /* Black text *
+    --color-fill: 34, 34, 34; /* A dark background color *
+    --color-fill-extreme: 0, 0, 0; /* An even darker background color *
+    --color-button-accent: 255, 255, 255; /* White button text *
+    --color-button-accent-hover: 200, 200, 200; /* Light gray button text on hover *
+    --color-button-muted: 100, 100, 100; /* A slightly darker gray for muted buttons *
+    --color-border-base: 255, 255, 255; /* White borders *
   }
-}
+} 
+*/
 
 @layer utilities {
   @variants responsive {

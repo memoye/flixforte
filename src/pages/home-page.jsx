@@ -21,6 +21,9 @@ export const HomePage = () => {
     return (
         <div>
             <Hero />
+            <div className="w-full h-20 bg-primary">
+
+            </div>
             {
                 sections.map(section => (
                     <Section

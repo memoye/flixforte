@@ -1,3 +1,4 @@
+export { CardSkeleton } from './loaders/skeletons'
 export { Header } from './header/header'
 export { Footer } from './layout/footer'
 export { SearchBox } from './header/searchbox'

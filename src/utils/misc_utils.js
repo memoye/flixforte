@@ -109,11 +109,11 @@ export function debounce(func, wait = 100) {
     };
 }
 
-export function truncateString(str) {
-    if (str.length > 25) {
+export function truncateString(str, max_length = 25) {
+    if (str.length > max_length) {
         return {
             truncated: true,
-            str: str.slice(0, 25) + '...'
+            str: str.slice(0, max_length) + '...'
         } // Truncate and add '...' to indicate truncation
     } else {
         return {

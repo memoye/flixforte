@@ -14,13 +14,49 @@ export const MediaCard = ({ adult, backdrop_path, genre_ids, id, original_langua
 
     return (
         <>
-            <div className={ `carousel-item flex-col max-h-fit bg-primary p-2 relative max-w-xs rounded-[30px] hover:shadow-lg transition-transform hover:-rotate-1 group` }>
-                <figure className="rounded-[22px] rounded-br-lg overflow-hidden min-h-[250px] relative">
-                    <img className="h-full object-cover" src={ `https://image.tmdb.org/t/p/original${backdrop_path}` } alt={ original_title } />
-                    { comingSoon && <div className="absolute badge badge-md top-4 right-4">COMING SOON</div> }
+            <div className={ `sm:carousel-item rounded-3xl flex-col max-h-fit bg-primary p-2 relative max-w-xs hover:rounded-[30px] hover:shadow-lg transition-transform ))_hover:-rotate-1 group` }>
+
+                <figure className="hidden group-hover:block rounded-[22px] rounded-br-lg overflow-hidden sm:min-h-[250px] relative"
+                    style={ {
+                        background: `url(https://image.tmdb.org/t/p/original${backdrop_path}) no-repeat center / cover`
+                    } }
+                >
+                    {/* <img className="border w-full" src={ `https://image.tmdb.org/t/p/original${backdrop_path}` } alt={ original_title } /> */ }
+                    { comingSoon && <div className="absolute badge badge-md top-4 right-4">COMING SOON</div>
+                    }
                 </figure>
 
-                <div className={ `flex w-11/12 ml-auto px-2 items-start gap-2 max-h-32 pr-2 -mt-6` }>
+                <div className="card image-full group-hover:hidden">
+                    <figure><img src={ `https://image.tmdb.org/t/p/original${backdrop_path}` } alt="Shoes" /></figure>
+                    <div className="card-body ">
+                        <h2 className="card-title">{ title }</h2>
+                        <p>{ truncateString(overview, 110).str }</p>
+                        <div className="card-actions flex">
+                            <>
+                                <div className="join join-horizontal items-center space-x-2">
+                                    <span className="stat-value">{ roundToNearestHalf(vote_average).toFixed(1) }</span>
+                                    <Rating
+                                        uniqueKey={ crypto.randomUUID() }
+                                        selectedValue={ vote_average }
+                                    />
+                                </div>
+                                <div className="stat-desc">{ vote_count.toLocaleString() } ratings | Popularity: { roundToNearestHalf(popularity).toLocaleString() }</div>
+                            </>
+                            <button
+                                value={ id }
+                                className="btn btn-circle btn-secondary ml-auto"
+                                onClick={ async () => {
+                                    await setIsModalOpen(true)
+                                    document.getElementById(`trailer_modal_${id}`).showModal()
+                                } }
+                            >
+                                <TbPlayerPlay className="m-0 mx-auto text-3xl" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={ `hidden group-hover:flex w-11/12 ml-auto px-2 items-start gap-2 max-h-32 pr-2 -mt-6` }>
                     <figure
                         className="w-1/3 rounded-md overflow-hidden -translate-y-3 shadow-lg shadow-[rgba(0,0,0,0.5)] transition-transform hover:rotate-2 z-0"
                         onClick={ () => document.getElementById(`poster_modal_${id}`).showModal() }
@@ -41,7 +77,6 @@ export const MediaCard = ({ adult, backdrop_path, genre_ids, id, original_langua
                             <TbPlayerPlay className="m-0 mx-auto text-3xl" />
                         </button>
 
-
                         <div className={ `${truncated ? 'tooltip tooltip-top w-fit' : ''} mb-auto text-left` } data-tip={ title }>
                             <h3 className="text-lg">{ dispTitle }</h3>
                             <p className="font-extralight flex items-center gap-1">
@@ -52,7 +87,7 @@ export const MediaCard = ({ adult, backdrop_path, genre_ids, id, original_langua
                     </div>
                 </div>
 
-                <div className="stats bg-opacity-50 w-full ml-auto mt-5 rounded-b-[22px] rounded-tl-lg">
+                <div className="hidden group-hover:flex stats bg-opacity-50 w-full ml-auto mt-5 rounded-b-[22px] rounded-tl-lg">
                     <div className="stat">
                         <div className="stat-title">Rating</div>
                         <div className="join join-horizontal items-center space-x-2">
@@ -78,7 +113,7 @@ export const MediaCard = ({ adult, backdrop_path, genre_ids, id, original_langua
                             <TbShare className="mx-auto" size={ 20 } /></button>
                     </div>
                 </div>
-            </div>
+            </div >
             <TrailerModal
                 movie_id={ id }
                 title={ original_title }

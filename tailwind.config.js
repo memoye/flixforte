@@ -29,23 +29,24 @@ export default {
         'sans': ['Inter', 'sans-serif'],
         'serif': ['Merriweather', 'serif'],
       },
-      textColor: {
-        skin: {
-          base: withOpacity("--color-text-base"),
-          muted: withOpacity("--color-text-muted"),
-          inverted: withOpacity("--color-text-inverted"),
-          extreme: withOpacity("--color-fill-extreme"),
-        }
-      },
-      backgroundColor: {
-        skin: {
-          fill: withOpacity("--color-fill"),
-          'button-accent': withOpacity("--color-button-accent"),
-          'button-muted': withOpacity("--color-button-muted"),
-          'button-accent-hover': withOpacity("--color-button-accent-hover"),
-          'fill-extreme': withOpacity("--color-fill-extreme"),
-        }
-      },
+
+      /*   textColor: {
+          skin: {
+            base: withOpacity("--color-text-base"),
+            muted: withOpacity("--color-text-muted"),
+            inverted: withOpacity("--color-text-inverted"),
+            extreme: withOpacity("--color-fill-extreme"),
+          }
+        },
+        backgroundColor: {
+          skin: {
+            fill: withOpacity("--color-fill"),
+            'button-accent': withOpacity("--color-button-accent"),
+            'button-muted': withOpacity("--color-button-muted"),
+            'button-accent-hover': withOpacity("--color-button-accent-hover"),
+            'fill-extreme': withOpacity("--color-fill-extreme"),
+          }
+        }, */
 
       backgroundImage: {
         'blob': `url('./src/assets/animatedblob.gif')`,
@@ -58,12 +59,13 @@ export default {
           "0 0px 65px rgba(240, 230, 140, 0.2)"
         ]
       },
-      borderColor: {
-        skin: {
-          base: withOpacity("--color-border-base"),
-          muted: withOpacity("--color-text-muted"),
-        },
-      },
+
+      /*  borderColor: {
+          skin: {
+            base: withOpacity("--color-border-base"),
+            muted: withOpacity("--color-text-muted"),
+          },
+        }, */
 
       gradientColorStops: {
         skin: {

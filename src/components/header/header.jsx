@@ -9,7 +9,7 @@ import { TbMenu, TbMenu2, TbSearch, TbX } from 'react-icons/tb';
 export const Header = () => {
     const [searchOpen, setSearchOpen] = useState(false)
     const [navOpen, setNavOpen] = useState(false)
-    const headerRef = useRef(null)
+    const headerRef = useRef()
 
     function handleSearchBtn() {
         setSearchOpen(true)
@@ -22,7 +22,7 @@ export const Header = () => {
             if (window.scrollY > 70) {
                 headerRef.current.classList.add('fixed', 'backdrop-blur-lg', 'backdrop-brightness-90', '-top-20')
             } else {
-                headerRef.current.classList.remove('fixed', 'backdrop-brightness-90')
+                headerRef.current.classList.remove('fixed', 'backdrop-brightness-90', 'backdrop-blur-lg')
             }
 
             if (window.scrollY > 20) {
@@ -46,8 +46,7 @@ export const Header = () => {
     return (
         <>
             { searchOpen &&
-                <div className='w-screen h-screen fixed z-40  '
-                >
+                <div className='w-screen h-screen fixed z-40 fixed'>
                     <SearchBox
                         setSearchOpen={ setSearchOpen }
                         searchOpen={ searchOpen }
@@ -73,7 +72,7 @@ export const Header = () => {
 
                     <ThemeToggle />
 
-                    <li className="flex items-center ">
+                    <li className="flex items-center">
                         <button className="text-xl"
                             onClick={ handleSearchBtn }
                         >
