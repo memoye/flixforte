@@ -1,6 +1,6 @@
 import { Logo } from './Logo';
 import { HeaderActions } from './header-actions';
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { logo } from "../../assets"
 import { Navbar, SearchBox, MobileNav, ThemeToggle } from '../index';
 import { useEffect, useRef, useState } from "react"
@@ -54,12 +54,14 @@ export const Header = () => {
                 </div>
             }
 
-            { navOpen &&
+            {/* { navOpen &&
                 <MobileNav
                     navOpen={ navOpen }
                     setIsOpen={ setNavOpen }
                 />
-            }
+            } */}
+
+
 
             <header ref={ headerRef } className="flex items-center transition-[top] justify-between px-4 h-16 z-30  w-full">
                 <Logo />
@@ -67,8 +69,7 @@ export const Header = () => {
                 {/* desktop nav */ }
                 <Navbar />
 
-
-                <ul className="flex items-center gap-2 ">
+                <ul className="flex items-center gap-2 z-10">
 
                     <ThemeToggle />
 
@@ -81,13 +82,28 @@ export const Header = () => {
                     </li>
 
                     <HeaderActions setSearchOpen={ setSearchOpen } />
-                    <button className={ `focus:border border-skin-base p-1 rounded-sm md:hidden` }
-                        onClick={ () => setNavOpen(!navOpen) }
-                    >
-                        { navOpen ? <TbX /> : <TbMenu2 /> }
-                    </button>
+
+                    <label htmlFor="my-drawer-4" className="drawer-button btn btn-ghost p-2 md:hidden">
+                        <TbMenu2 />
+                    </label>
+
                 </ul>
             </header>
+            <div className="drawer drawer-end z-50">
+                <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+                <div className="drawer-content">
+                    {/* Page content here */ }
+                </div>
+                <div className="drawer-side">
+                    <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
+                    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                        {/* Sidebar content here */ }
+                        <li><NavLink to={ '/' }>Home</NavLink></li>
+                        <li><NavLink to={ '/movies' }>Movies</NavLink></li>
+                        <li><NavLink to={ '/series' }>TV Shows</NavLink></li>
+                    </ul>
+                </div>
+            </div>
         </>
     )
 }

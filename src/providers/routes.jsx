@@ -6,6 +6,7 @@ import {
 
 import Root from "../root"
 import { HomePage, MoviesPage, SeriesPage, SignInPage } from "../pages"
+import { action as SignInFormAction } from "../pages/sign-in";
 
 const routes = createBrowserRouter([
     {
@@ -27,8 +28,9 @@ const routes = createBrowserRouter([
         ],
     },
     {
-        path: 'login',
-        element: <SignInPage />
+        path: 'signin',
+        element: <SignInPage />,
+        action: SignInFormAction
     }
 ]);
 

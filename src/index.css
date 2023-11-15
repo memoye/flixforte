@@ -79,7 +79,7 @@
 }
 
 .tableSvg {
-  filter: invert();
+  filter: brightness(0);
 }
 
 .dark .tableSvg {

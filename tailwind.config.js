@@ -74,9 +74,18 @@ export default {
       },
     },
   },
+  daisyui: {
+    themes: [
+      "retro",
+      // "light",
+      // "lofi",
+      "dark"
+    ],
+  },
   plugins: [
     require('preline/plugin'),
     require("daisyui")
   ],
+
 }
 

@@ -29,7 +29,7 @@ export const Hero = () => {
                 </div>
             </div>
 
-            <div className="hero min-h-screen" style={ { backgroundImage: `url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)` } }>
+            {/* <div className="hero min-h-screen" style={ { backgroundImage: `url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)` } }>
                 <div className="hero-overlay bg-black bg-opacity-70"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
@@ -39,7 +39,7 @@ export const Hero = () => {
                         <button className="btn btn-primary">Get Started</button>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

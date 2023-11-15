@@ -55,7 +55,6 @@ export function formatDate(date, part) {
     }
 }
 
-
 // To toggle light or dark mode
 export async function setTheme(theme) {
     const availableThemes = ['dark', 'light'];
@@ -129,4 +128,48 @@ export function isReleased(dateString) {
 
     // Compare the input date with the current date
     return inputDate < currentDate;
+}
+
+export function validate(values) {
+    const errors = {}
+
+    if (!values.username) {
+        errors.username = 'Required ⚠️';
+    }
+
+    if (!values.password) {
+        errors.lastName = 'Required ⚠️';
+    } else if (values.password.length < 4) {
+        errors.password = '❌ Password must be at least 4 characters';
+    }
+
+    return errors
+}
+
+export const noInternet = {
+    message: 'Connection lost!',
+    code: 'NO_INTERNET',
+    response:
+    {
+        data: {
+            success: false,
+            status_code: 0,
+            status_message: "No internet: Please check your connection and try again."
+        }
+    }
+}
+
+export async function handleShowPassword(setShowPassword) {
+    await setShowPassword(true)
+    setTimeout(() => {
+        setShowPassword(false)
+        eyeToggle.click()
+    }, 3000);
+}
+
+export const hasExpired = (dateStr) => {
+    const expirationDate = new Date(dateStr),
+        currentTime = new Date().getTime();
+
+    return expirationDate.getTime() < currentTime;
 }

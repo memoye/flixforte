@@ -1,3 +1,4 @@
+export { TextInput } from './user_interactions/text-input'
 export { CardSkeleton } from './loaders/skeletons'
 export { Header } from './header/header'
 export { Footer } from './layout/footer'

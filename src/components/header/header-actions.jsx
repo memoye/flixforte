@@ -12,7 +12,6 @@ export const HeaderActions = ({ setSearchOpen }) => {
 
     return (
         <>
-
             { user ?
                 <>
                     <li className="flex items-center -z-10">
@@ -30,15 +29,11 @@ export const HeaderActions = ({ setSearchOpen }) => {
                 </>
                 :
                 <>
-                    <li className="font-semibold hover:text-skin-muted">
-                        <Link>Login</Link>
+                    <li className="font-semibold min-w-max">
+                        <Link to={ '/signin' } className='btn btn-sm btn-accent'>Sign in</Link>
                     </li>
-                    {/* <li className="bg-skin-button-accent text-skin-inverted px-2 py-1 rounded hover:bg-skin-button-accent-hover">
-                        <Link className="">Sign up</Link>
-                    </li> */}
                 </>
             }
-
         </>
     );
 }
