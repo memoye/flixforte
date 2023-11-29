@@ -2,17 +2,21 @@ import { useState } from 'react'
 import { TbAlertCircle, TbArrowBack, TbBrandGoogle, TbEye, TbEyeClosed } from 'react-icons/tb'
 import { google, tmdbLong, tmdbSquare } from '../assets'
 import { Logo, TextInput } from '../components'
-import { Await, defer, redirect, useActionData, useNavigate } from 'react-router-dom'
+import { Await, Navigate, defer, redirect, useActionData, useNavigate } from 'react-router-dom'
 import { ErrorMessage, Field, Formik, Form } from 'formik'
 import { handleShowPassword, noInternet, validate } from '../utils/misc_utils'
-import { generateSession, getTMDbRequestToken, validateWithLogin } from '../utils/auth'
 import { HelpfulError } from '../components/others/Misc'
 import { ErrorWrapper, validationSchema } from '../utils/validation'
 import { useMutation } from '@tanstack/react-query'
-import { tmdbLogin } from '../services/auth'
-
+import { tmdbLogin } from '../services/tmdb_identity'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const SignInPage = () => {
+    const { login_error, logged_in } = useSelector((state) => state.user)
+
+    if (logged_in) {
+        return <Navigate to={ '/' } />
+    }
 
     return (
         <>
@@ -32,11 +36,11 @@ export const SignInPage = () => {
 
                     <div>
                         {
-                            // data?.response && data?.response?.status !== 200 ?
-                            //     <div className='alert alert-error items-start'>
-                            //         <TbAlertCircle />
-                            //         <HelpfulError string={ data?.response?.data?.status_message } />
-                            //     </div> : ''
+                            login_error ?
+                                <div className='alert alert-error items-start'>
+                                    <TbAlertCircle />
+                                    <HelpfulError string={ login_error } />
+                                </div> : ''
                         }
                         <SignInForm />
                     </div>
@@ -60,12 +64,7 @@ export const SignInPage = () => {
 
 export function SignInForm() {
     const [showPassword, setShowPassword] = useState(false)
-    const { mutateAsync: userLogin, data, isPending, isError, error } = useMutation({
-        mutationKey: ['user_login'],
-        mutationFn: (values) => {
-            tmdbLogin(values)
-        }
-    })
+    const dispatch = useDispatch()
 
     return (
         <Formik
@@ -73,7 +72,7 @@ export function SignInForm() {
                 username: '',
                 password: ''
             } }
-            onSubmit={ userLogin }
+            onSubmit={ async (values) => tmdbLogin(values, dispatch) }
             validationSchema={ validationSchema }
         >
             {
@@ -164,23 +163,3 @@ export function SignInForm() {
     )
 }
 
-export async function action({ request }) {
-    const formData = await request.formData()
-    const login = Object.fromEntries(formData)
-
-    const online = navigator.onLine
-
-    if (!online) return noInternet
-
-    const validated_user = await validateWithLogin(login);
-    const user = await generateSession(validated_user, login.username)
-
-    // if (validated_user.response.data.success) {
-    //     return redirect('/')
-    // }
-    if (user) {
-        return redirect('/')
-    } else {
-        return validated_user
-    }
-}

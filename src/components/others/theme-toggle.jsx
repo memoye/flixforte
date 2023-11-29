@@ -14,13 +14,13 @@ export const ThemeToggle = () => {
         <label className="swap swap-rotate">
 
             {/* this hidden checkbox controls the state */ }
-            <input type="checkbox" />
+            <input type="checkbox" className="theme-controller" data-act-class="ACTIVECLASS" value="dark" />
 
             {/* sun icon */ }
-            <TbMoon data-set-theme="retro" data-act-class="ACTIVECLASS" className="swap-on fill-current" />
+            <TbMoon className="swap-on fill-current" />
 
             {/* moon icon */ }
-            <TbSun data-set-theme="dark" data-act-class="ACTIVECLASS" className="swap-off fill-current" />
+            <TbSun className="swap-off fill-current" />
         </label>
     )
 }

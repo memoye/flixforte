@@ -1,15 +1,15 @@
 import { FaUserCircle } from 'react-icons/fa'
 import { TbBell, TbBellHeart, TbBellMinus, TbSearch } from 'react-icons/tb'
+import { useSelector } from 'react-redux';
 import { Link, useRouteLoaderData } from 'react-router-dom';
 
 export const HeaderActions = ({ setSearchOpen }) => {
-    const user = JSON.parse(sessionStorage.getItem('validated_user'))
 
-    // useRouteLoaderData("root");
+    const { logged_in, user_name } = useSelector((state) => state.user)
 
     return (
         <>
-            { user?.logged_in ?
+            { logged_in ?
                 <>
                     <li className="flex items-center -z-10">
 
@@ -19,7 +19,7 @@ export const HeaderActions = ({ setSearchOpen }) => {
 
                     </li>
                     <li className="pl-1">
-                        <Link to={ `/profile:` } className="text-2xl">
+                        <Link to={ `/${user_name}` } className="text-2xl">
                             <FaUserCircle />
                         </Link>
                     </li>

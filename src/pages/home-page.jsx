@@ -18,9 +18,6 @@ const sections = [
 ]
 
 export const HomePage = () => {
-    const data = useLoaderData()
-    console.log(data)
-
     return (
         <div>
             <Hero />

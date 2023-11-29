@@ -1,22 +1,17 @@
 import { useEffect, useRef, useState } from "react"
 import { Logo } from './Logo';
 import { HeaderActions } from './header-actions';
-import { Link, NavLink, useRouteLoaderData } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { Navbar, SearchBox, MobileNav, ThemeToggle } from '../index';
-import { TbMenu, TbMenu2, TbSearch, TbX } from 'react-icons/tb';
+import { TbMenu2, TbSearch, TbX } from 'react-icons/tb';
 
 export const Header = () => {
     const [searchOpen, setSearchOpen] = useState(false)
-    const [navOpen, setNavOpen] = useState(false)
     const headerRef = useRef()
-
-    // const user = useRouteLoaderData("root");
 
     function handleSearchBtn() {
         setSearchOpen(true)
     }
-
-
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -36,13 +31,12 @@ export const Header = () => {
 
             if (window.scrollY > 200) {
                 headerRef.current.classList.add('-top-20')
-                //     headerRef.current.classList.add('backdrop-blur-lg')
             }
         })
 
         window.addEventListener('scrollend', () => {
-            headerRef.current.classList.remove('-top-20')
-            headerRef.current.classList.add('top-0')
+            headerRef?.current?.classList?.remove('-top-20')
+            headerRef?.current?.classList.add('top-0')
         })
     }, [])
 

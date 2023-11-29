@@ -1,6 +1,4 @@
-import { useLoaderData } from "react-router-dom"
 import { request } from "../../utils/axios-utils"
-import { tmdb_logout } from "../../utils/auth"
 
 const sample_user = {
     "avatar": {
