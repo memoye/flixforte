@@ -1,9 +1,8 @@
+import { useEffect, useRef, useState } from "react"
 import { Logo } from './Logo';
 import { HeaderActions } from './header-actions';
-import { Link, NavLink } from "react-router-dom"
-import { logo } from "../../assets"
+import { Link, NavLink, useRouteLoaderData } from "react-router-dom"
 import { Navbar, SearchBox, MobileNav, ThemeToggle } from '../index';
-import { useEffect, useRef, useState } from "react"
 import { TbMenu, TbMenu2, TbSearch, TbX } from 'react-icons/tb';
 
 export const Header = () => {
@@ -11,13 +10,17 @@ export const Header = () => {
     const [navOpen, setNavOpen] = useState(false)
     const headerRef = useRef()
 
+    // const user = useRouteLoaderData("root");
+
     function handleSearchBtn() {
         setSearchOpen(true)
     }
 
+
+
     useEffect(() => {
         window.addEventListener('scroll', () => {
-            headerRef.current.classList.remove('top-0')
+            headerRef?.current.classList.remove('top-0')
 
             if (window.scrollY > 70) {
                 headerRef.current.classList.add('fixed', 'backdrop-blur-lg', 'backdrop-brightness-90', '-top-20')
@@ -46,22 +49,13 @@ export const Header = () => {
     return (
         <>
             { searchOpen &&
-                <div className='w-screen h-screen fixed z-40 fixed'>
+                <div className='w-screen h-screen fixed z-40'>
                     <SearchBox
                         setSearchOpen={ setSearchOpen }
                         searchOpen={ searchOpen }
                     />
                 </div>
             }
-
-            {/* { navOpen &&
-                <MobileNav
-                    navOpen={ navOpen }
-                    setIsOpen={ setNavOpen }
-                />
-            } */}
-
-
 
             <header ref={ headerRef } className="flex items-center transition-[top] justify-between px-4 h-16 z-30  w-full">
                 <Logo />
@@ -95,8 +89,8 @@ export const Header = () => {
                     {/* Page content here */ }
                 </div>
                 <div className="drawer-side">
-                    <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                    <label htmlFor="my-drawer-4" aria-label="close sidebar md:hidden" className="drawer-overlay"></label>
+                    <ul className="menu md:hidden p-4 w-80 min-h-full bg-base-200 text-base-content">
                         {/* Sidebar content here */ }
                         <li><NavLink to={ '/' }>Home</NavLink></li>
                         <li><NavLink to={ '/movies' }>Movies</NavLink></li>

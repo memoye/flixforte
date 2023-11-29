@@ -1,23 +1,18 @@
-import { Suspense, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { TbAlertCircle, TbArrowBack, TbBrandGoogle, TbEye, TbEyeClosed } from 'react-icons/tb'
 import { google, tmdbLong, tmdbSquare } from '../assets'
 import { Logo, TextInput } from '../components'
-import { Await, Form, defer, redirect, useActionData, useNavigate } from 'react-router-dom'
-import { useFormik } from 'formik'
+import { Await, defer, redirect, useActionData, useNavigate } from 'react-router-dom'
+import { ErrorMessage, Field, Formik, Form } from 'formik'
 import { handleShowPassword, noInternet, validate } from '../utils/misc_utils'
-import { request as axiosRequest } from '../utils/axios-utils'
-import { getTMDbRequestToken, validateWithLogin } from '../utils/auth'
-import axios from 'axios'
+import { generateSession, getTMDbRequestToken, validateWithLogin } from '../utils/auth'
 import { HelpfulError } from '../components/others/Misc'
-import localforage from 'localforage'
+import { ErrorWrapper, validationSchema } from '../utils/validation'
+import { useMutation } from '@tanstack/react-query'
+import { tmdbLogin } from '../services/auth'
 
 
 export const SignInPage = () => {
-    const navigate = useNavigate()
-
-    const data = useActionData()
-
-    useEffect(() => { data && console.log(data, 'from router') }, [data])
 
     return (
         <>
@@ -37,13 +32,13 @@ export const SignInPage = () => {
 
                     <div>
                         {
-                            data?.response && data?.response?.status !== 200 ?
-                                <div className='alert alert-error items-start'>
-                                    <TbAlertCircle />
-                                    <HelpfulError string={ data?.response?.data?.status_message } />
-                                </div> : ''
+                            // data?.response && data?.response?.status !== 200 ?
+                            //     <div className='alert alert-error items-start'>
+                            //         <TbAlertCircle />
+                            //         <HelpfulError string={ data?.response?.data?.status_message } />
+                            //     </div> : ''
                         }
-                        <SignInForm data={ data } />
+                        <SignInForm />
                     </div>
 
                     <div className="divider">OR</div>
@@ -63,114 +58,109 @@ export const SignInPage = () => {
     )
 }
 
-export function SignInForm({ data }) {
-
+export function SignInForm() {
     const [showPassword, setShowPassword] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-
-    const formik = useFormik({
-        initialValues: {
-            username: '',
-            password: ''
-        },
-        validate,
+    const { mutateAsync: userLogin, data, isPending, isError, error } = useMutation({
+        mutationKey: ['user_login'],
+        mutationFn: (values) => {
+            tmdbLogin(values)
+        }
     })
 
-    useEffect(() => {
-        if (data) setIsLoading(false)
-        else {
-            setIsLoading(false)
-        }
-    }, [data])
-
-    // const isError = false
-
     return (
-        <div>
-            <Form
-
-                method='post'
-                className="card-body p-0"
-            >
-                <div className="form-control">
-                    <label className="label font-semibold">
-                        <span className="label-text text-lg">Username</span>
-                    </label>
-                    <input
-                        id="username"
-                        name="username"
-                        type="username"
-                        placeholder="username"
-                        className={ `input input-bordered ${formik.errors.username ? 'outline outline-error' : ''}` }
-                        onChange={ formik.handleChange }
-                        value={ formik.values.username }
-                        required
-                    />
-                    <label className="label">
-                        <p className="label-text-alt text-error">{ formik.errors.username }</p>
-                    </label>
-                </div>
-
-                <div className="form-control mt-1">
-                    <label className="label font-semibold">
-                        <span className="label-text text-lg">Password</span>
-                    </label>
-                    <div className='w-full relative'>
-                        <input
-                            id="password"
-                            name="password"
-                            type={ showPassword ? 'text' : 'password' }
-                            placeholder="password"
-                            className={ `input input-bordered ${formik.errors.password ? 'outline outline-error' : ''} w-full` }
-                            onChange={ formik.handleChange }
-                            value={ formik.values.password }
-                            required
-                        />
-                        <label className="swap w-fit absolute top-1/2 -translate-y-1/2 right-4">
-                            <input type="checkbox" id='eyeToggle' defaultChecked={ showPassword } />
-                            <TbEye className='swap-on'
-                                onClick={ () => handleShowPassword(setShowPassword) }
+        <Formik
+            initialValues={ {
+                username: '',
+                password: ''
+            } }
+            onSubmit={ userLogin }
+            validationSchema={ validationSchema }
+        >
+            {
+                (formik) => (
+                    <Form className="card-body p-0">
+                        <div className="form-control">
+                            <label className="label font-semibold">
+                                <span className="label-text text-lg">Username</span>
+                            </label>
+                            <Field
+                                id="username"
+                                name="username"
+                                type="text"
+                                placeholder="username"
+                                className={ `input input-bordered` }
                             />
-                            <TbEyeClosed className='swap-off' onClick={ () => setShowPassword(false) } />
-                        </label>
-                    </div>
-                    <label className="label">
-                        <p className="label-text-alt text-error min-h-6">{ formik.errors.password }</p>
-                    </label>
+                            <label className="label p-0 pt-1">
+                                <small className="label-text-alt text-error flex items-center min-h-[1rem] self-start">
+                                    <ErrorMessage component={ ErrorWrapper } name={ 'username' } />
+                                </small>
+                            </label>
+                        </div>
+
+                        <div className="form-control mt-1">
+                            <label className="label font-semibold">
+                                <span className="label-text text-lg">Password</span>
+                            </label>
+                            <div className='w-full relative'>
+                                <Field
+                                    id="password"
+                                    name="password"
+                                    type={ showPassword ? 'text' : 'password' }
+                                    placeholder="password"
+                                    className={ `input input-bordered w-full bg-transparent pr-10 
+                                    placeholder:font-sans placeholder:tracking-normal xl:text-2xl font-mono tracking-widest` }
+                                    onChange={ formik.handleChange }
+                                    value={ formik.values.password }
+                                    required
+                                />
+                                <label className="swap w-fit absolute top-1/2 -translate-y-1/2 right-4">
+                                    <input type="checkbox" id='eyeToggle' onChange={ () => setShowPassword(!showPassword) } defaultChecked={ showPassword } />
+                                    <TbEye className='swap-on'
+                                    />
+                                    <TbEyeClosed className='swap-off' />
+                                </label>
+                            </div>
+                            <label className="label p-0 pt-1">
+                                <small className="label-text-alt text-error flex items-center min-h-[1rem] self-start">
+                                    <ErrorMessage component={ ErrorWrapper } name={ 'password' } />
+                                </small>
+                            </label>
 
 
-                </div>
+                        </div>
 
-                <div className="form-control mt-1 mb-4">
-                    <button
-                        type='submit'
-                        onClick={ () => setTimeout(() => setIsLoading(true)) }
-                        className={ `btn btn-secondary text-lg` }
-                        disabled={
-                            isLoading === true ||
-                            formik.errors.username ||
-                            formik.values.password.length < 4
-                        }
-                    >
-                        {
-                            isLoading ?
-                                <span className="loading loading-bars loading-md" />
-                                : <div className='flex gap-2 items-center justify-end w-full relative '>
-                                    <div className=' absolute left-1/2 -translate-x-1/2'>login</div>
-                                    <div className={ `w-fit ${formik.errors.username || formik.values.password.length < 4 ? 'opacity-10' : 'opacity-90'} scale-75` }>
-                                        <p className='label-text-alt min-w-max italic lowercase'>powered by</p>
-                                        <img src={ tmdbSquare } className='h-3/5' alt="Sign in with TMDb account" />
-                                    </div>
-                                </div>
-                        }
-                    </button>
-                    <label className="label justify-between">
-                        <a href="https://www.themoviedb.org/reset-password" target='_blank' className="link link-hover">Forgot password?</a>
-                        <a href="https://www.themoviedb.org/signup" target='_blank' className="link link-hover">Create TMDB account</a>
-                    </label>
-                </div>
-            </Form>
-        </div>
+                        <div className="form-control mt-1 mb-4">
+                            <button
+                                type='submit'
+                                className={ `btn btn-secondary text-lg` }
+
+                                disabled={
+                                    formik.isSubmitting ||
+                                    formik.errors.username ||
+                                    formik.values.password.length < 4
+                                }
+                            >
+                                {
+                                    formik.isSubmitting ?
+                                        <span className="loading loading-bars loading-md" />
+                                        : <div className='flex gap-2 items-center justify-end w-full relative '>
+                                            <div className=' absolute left-1/2 -translate-x-1/2'>login</div>
+                                            <div className={ `w-fit ${formik.errors.username || formik.values.password.length < 4 ? 'opacity-10' : 'opacity-90'} scale-75` }>
+                                                <p className='label-text-alt min-w-max italic lowercase'>powered by</p>
+                                                <img src={ tmdbSquare } className='h-3/5' alt="Sign in with TMDb account" />
+                                            </div>
+                                        </div>
+                                }
+                            </button>
+                            <label className="label justify-between">
+                                <a href="https://www.themoviedb.org/reset-password" target='_blank' className="link link-hover">Forgot password?</a>
+                                <a href="https://www.themoviedb.org/signup" target='_blank' className="link link-hover">Create TMDB account</a>
+                            </label>
+                        </div>
+                    </Form>
+                )
+            }
+        </Formik>
     )
 }
 
@@ -182,6 +172,15 @@ export async function action({ request }) {
 
     if (!online) return noInternet
 
-    await validateWithLogin(login)
-    return redirect('/')
+    const validated_user = await validateWithLogin(login);
+    const user = await generateSession(validated_user, login.username)
+
+    // if (validated_user.response.data.success) {
+    //     return redirect('/')
+    // }
+    if (user) {
+        return redirect('/')
+    } else {
+        return validated_user
+    }
 }

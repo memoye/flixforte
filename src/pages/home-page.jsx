@@ -1,5 +1,6 @@
 import { TbDeviceTvOld, TbMovie } from "react-icons/tb"
 import { Hero, MediaCard, Section } from "../components"
+import { useLoaderData } from "react-router-dom"
 
 const sections = [
     {
@@ -17,6 +18,8 @@ const sections = [
 ]
 
 export const HomePage = () => {
+    const data = useLoaderData()
+    console.log(data)
 
     return (
         <div>
@@ -34,4 +37,8 @@ export const HomePage = () => {
             }
         </div>
     )
+}
+
+export async function loader() {
+    return JSON.parse(sessionStorage.getItem('validated_user'))
 }

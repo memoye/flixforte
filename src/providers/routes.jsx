@@ -1,12 +1,13 @@
-
 import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom"
 
 import Root from "../root"
-import { HomePage, MoviesPage, SeriesPage, SignInPage } from "../pages"
+import { Account, HomePage, MoviesPage, SeriesPage, SignInPage } from "../pages"
 import { action as SignInFormAction } from "../pages/sign-in";
+import { loader as HomePageLoader } from "../pages/home-page";
+import { loader as AccountLoader } from "../pages/Account";
 
 const routes = createBrowserRouter([
     {
@@ -15,7 +16,9 @@ const routes = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <HomePage />
+                element: <HomePage />,
+                loader: HomePageLoader,
+                id: 'root'
             },
             {
                 path: 'movies',
@@ -24,6 +27,11 @@ const routes = createBrowserRouter([
             {
                 path: 'series',
                 element: <SeriesPage />
+            },
+            {
+                path: 'account',
+                element: <Account />,
+                // loader: AccountLoader
             },
         ],
     },

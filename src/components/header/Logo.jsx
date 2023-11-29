@@ -5,7 +5,7 @@ export const Logo = ({ text = true, img = true, className }) => {
     return (
         <Link to={ '/' } className={ `flex gap-1 items-center font-black font-serif text-2xl group ${className}` }>
             { img && <div>
-                <img className="w-[60px] aspect-auto drop-shadow group-hover:drop-shadow-sm" src={ logo } alt="logo by logoipsum" />
+                <img className="w-[60px] aspect-auto drop-shadow group-hover:drop-shadow-sm font-mono text-xs" src={ logo } alt="logo by logoipsum" />
             </div>
             }
             { text && (
