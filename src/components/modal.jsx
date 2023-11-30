@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react"
-import { useVideosData } from "../../hooks/tmdbApi"
+import { useVideosData } from "../hooks/tmdbApi"
 
 export const TrailerModal = ({ movie_id, title, modalControl }) => {
     const { data, isLoading } = useVideosData(movie_id)

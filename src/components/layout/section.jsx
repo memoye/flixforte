@@ -1,7 +1,7 @@
 import { TbArrowRight } from "react-icons/tb"
 import { useMoviesCategory } from "../../hooks/tmdbApi"
-import { MediaCard } from "../data_disp/card"
-import { TrailerModal } from "../data_disp/modal"
+import { Card } from "../Card"
+import { TrailerModal } from "../modal"
 import { CardSkeleton } from "../loaders/skeletons"
 
 
@@ -31,7 +31,7 @@ export const Section = ({ title, endpoint }) => {
                 </>
                     :
                     (!isError && data?.data?.results?.map((movie, i) => i < max ? (
-                        <MediaCard
+                        <Card
                             key={ movie.id }
                             tilt_dir={ i % 2 <= 0 ? '' : '-' }
                             { ...movie }
@@ -40,9 +40,11 @@ export const Section = ({ title, endpoint }) => {
                 }
             </div>
 
-            {/* <div className="sm:carousel carousel-center max-w-full p-8 sm:space-x-4 rounded-box overflow-y-visible mask-x">
-
-            </div> */}
+            {
+                /* <div className="sm:carousel carousel-center max-w-full p-8 sm:space-x-4 rounded-box overflow-y-visible mask-x">
+    
+                </div> */
+            }
         </section>
     )
 }

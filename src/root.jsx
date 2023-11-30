@@ -8,7 +8,7 @@ import { themeChange } from 'theme-change'
 function Root() {
     const location = useLocation()
 
-    useEffect(() => themeChange(false), [])
+    // useEffect(() => themeChange(false), [])
 
     return (
         <div className={ `relative bg-skin-fill overflow-x-hidden min-h-screen flex flex-col justify-between max-w-[1440px] mx-auto text-skin-base` }>

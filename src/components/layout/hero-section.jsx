@@ -1,7 +1,24 @@
+import { useSelector } from 'react-redux';
 import { HeroImg } from '../others/hero-img';
 import { Link } from 'react-router-dom'
 
 export const Hero = () => {
+    const { logged_in } = useSelector(state => state.user)
+
+    if (logged_in) {
+        return (
+            <div className="hero min-h-screen bg-base-200">
+                <div className="hero-content max-w-6xl flex-col lg:flex-row-reverse">
+                    <img src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" className="max-w-md rounded-lg shadow-2xl" />
+                    <div className='max-lg:text-center'>
+                        <h1 className="text-5xl font-bold">Box Office News!</h1>
+                        <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                        <button className="btn btn-primary">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <>

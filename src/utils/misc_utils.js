@@ -51,7 +51,7 @@ export function formatDate(date, part) {
         case 'day':
             return day;
         default:
-            return `${day} ${monthNames[month - 1]}, ${year}`;
+            return `${monthNames[month - 1].slice(0, 3)} ${day}, ${year}`;
     }
 }
 
@@ -173,3 +173,7 @@ export const hasExpired = (dateStr) => {
 
     return expirationDate.getTime() < currentTime;
 }
+
+export const getImage = path => `https://image.tmdb.org/t/p/original${path}`
+
+export const getRatingPercentage = vote_average => Math.round(vote_average * 10) 
