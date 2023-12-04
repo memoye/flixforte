@@ -1,14 +1,10 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { gradientBg } from './assets'
-import { Footer, Header } from './components'
-import { useEffect } from 'react'
-import { themeChange } from 'theme-change'
+import { Header, Footer } from './Layout'
 
 
 function Root() {
     const location = useLocation()
-
-    // useEffect(() => themeChange(false), [])
 
     return (
         <div className={ `relative bg-skin-fill overflow-x-hidden min-h-screen flex flex-col justify-between max-w-[1440px] mx-auto text-skin-base` }>

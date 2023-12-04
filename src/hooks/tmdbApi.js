@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { request } from "../utils/axios-utils"
 import { useNavigate } from "react-router-dom";
+import { useCyclicState } from "../hooks"
 
 /**
  * Retrieves a new TMDb request token.
@@ -23,7 +24,6 @@ export const getTMDbRequestToken = async () => {
     }
 };
 
-
 const fetchMoviesCategory = ({ queryKey }) => {
     const [_primaryKey, category] = queryKey
     return request({ url: category })
@@ -35,15 +35,6 @@ export const useMoviesCategory = (category) => {
     return useQuery({
         queryKey: ["movies", category],
         queryFn: fetchMoviesCategory,
-        // initialData: () => {
-        //     const moviesCategory = queryClient.getQueryData(['movies', category])?.data
-
-        //     if (moviesCategory) {
-        //         return { data: moviesCategory }
-        //     } else {
-        //         return undefined
-        //     }
-        // }
     })
 }
 
@@ -57,4 +48,43 @@ export const useVideosData = (movie_id) => {
         queryKey: ["movie", movie_id],
         queryFn: fetchVideos
     })
+}
+
+const fetchTrendingData = ({ queryKey }) => request({ url: queryKey.join('/') })
+export const useTrendingData = () => {
+    const [timeWindow, _setTimeWindow, handleTimeWindowChange] = useCyclicState(['day', 'week'])
+
+    const trendingData = useQuery({
+        queryKey: ["trending", "all", timeWindow],
+        queryFn: fetchTrendingData,
+        staleTime: 10 * 3600 * 1000,
+        refetchOnWindowFocus: false,
+    })
+
+    return { ...trendingData, handleTimeWindowChange }
+}
+
+const fetchMovies = ({ queryKey }) => request({ url: queryKey.join('/') })
+
+
+export const useMoviesData = (queryKey) => {
+    const [timeWindow, _setTimeWindow, handleTimeWindowChange] = useCyclicState(['day', 'week'])
+
+    if (queryKey.includes('trending')) {
+        const moviesData = useQuery({
+            queryKey: [...queryKey, timeWindow],
+            queryFn: fetchTrendingData,
+            staleTime: 10 * 3600 * 1000,
+            refetchOnWindowFocus: false,
+        })
+
+        return { ...moviesData, handleTimeWindowChange }
+    } else {
+        return useQuery({
+            queryKey,
+            queryFn: fetchMovies,
+            staleTime: 10 * 3600 * 1000,
+            refetchOnWindowFocus: false,
+        })
+    }
 }

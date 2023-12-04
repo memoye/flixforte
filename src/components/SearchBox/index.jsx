@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import { TbSearch, TbLoader } from "react-icons/tb"
-import { formatDate, stopBubbling, truncateString } from '../../utils/misc_utils'
+import { formatDate, stopBubbling, truncateString } from "../../utils/misc_utils"
 import { noResult } from "../../assets"
+
 
 const results = [
     // { id: '12', title: 'The Godfatherjdfl jdogj ng dkskjjkksjng', release_date: '10-2-1998' },

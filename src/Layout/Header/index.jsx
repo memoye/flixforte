@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react"
-import { Logo } from './Logo';
-import { HeaderActions } from './header-actions';
+import { Logo, CustomNav, SearchBox } from "../../components"
+import { ActionBtns } from './ActionBtns'
 import { NavLink } from "react-router-dom"
-import { Navbar, SearchBox, ThemeToggle } from '../index';
-import { TbMenu2, TbSearch, TbX } from 'react-icons/tb';
+import { TbMenu2, TbSearch, TbX } from 'react-icons/tb'
 
 export const Header = () => {
     const [searchOpen, setSearchOpen] = useState(false)
@@ -58,7 +57,7 @@ export const Header = () => {
                 <Logo />
 
                 {/* desktop nav */ }
-                <Navbar />
+                <CustomNav />
 
                 <ul className="flex items-center gap-2 z-10">
 
@@ -71,7 +70,7 @@ export const Header = () => {
                         </button>
                     </li>
 
-                    <HeaderActions setSearchOpen={ setSearchOpen } />
+                    <ActionBtns setSearchOpen={ setSearchOpen } />
 
 
 

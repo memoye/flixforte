@@ -12,11 +12,12 @@ import imgNotFound from './notfound.gif'
 import tmdbLong from './tmdb_long.svg'
 import tmdbSquare from './tmdb_square.svg'
 import google from './svgrepo_google.svg'
+import wavyLines from './backgrounds/wavy-lines.svg'
 
 export {
     gradientBg, logo, blob,
     noResult, movieNight, emiliaKit,
     elba, samJackson, table, toggles,
     imgNotFound, tmdbLong, tmdbSquare,
-    google
+    google, wavyLines
 }

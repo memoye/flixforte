@@ -1,9 +1,9 @@
 import { FaUserCircle } from 'react-icons/fa'
 import { TbBell, TbBellHeart, TbBellMinus, TbSearch } from 'react-icons/tb'
 import { useSelector } from 'react-redux';
-import { Link, useRouteLoaderData } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export const HeaderActions = ({ setSearchOpen }) => {
+export const ActionBtns = () => {
 
     const { logged_in, user_name } = useSelector((state) => state.user)
 

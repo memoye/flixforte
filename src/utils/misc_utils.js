@@ -51,7 +51,7 @@ export function formatDate(date, part) {
         case 'day':
             return day;
         default:
-            return `${monthNames[month - 1].slice(0, 3)} ${day}, ${year}`;
+            return `${monthNames[month - 1]?.slice(0, 3)} ${day}, ${year}`;
     }
 }
 
@@ -176,4 +176,18 @@ export const hasExpired = (dateStr) => {
 
 export const getImage = path => `https://image.tmdb.org/t/p/original${path}`
 
-export const getRatingPercentage = vote_average => Math.round(vote_average * 10) 
+export const getRatingPercentage = vote_average => {
+    const percentage = Math.round(vote_average * 10)
+    if (percentage < 0 || percentage > 100) {
+        throw new Error('Percentage must be between 0 and 100');
+    }
+
+    const breakpoints = [0, 25, 50, 70, 100];
+    const colors = ['red-500', 'orange-500', 'yellow-500', 'lime-500', 'green-500'];
+
+    for (let i = 0; i < breakpoints.length - 1; i++) {
+        if (percentage >= breakpoints[i] && percentage < breakpoints[i + 1]) {
+            return { percentage, color: colors[i] };
+        }
+    }
+}

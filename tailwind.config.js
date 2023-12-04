@@ -32,7 +32,9 @@ export default {
       backgroundImage: {
         'blob': `url('./src/assets/animatedblob.gif')`,
         'table': `url('./src/assets/table.svg')`,
-        'not-found': 'url(./src/assets/notfound.gif)'
+        'not-found': 'url(./src/assets/notfound.gif)',
+        'wavy-lines': 'url(./src/assets/backgrounds/wavy-lines.svg)',
+        'wavy-lines2': 'url(./src/assets/backgrounds/wavy-lines2.svg)',
       },
       dropShadow: {
         glow: [

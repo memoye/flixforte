@@ -3,7 +3,6 @@ import { elba, emiliaKit, samJackson, table, toggles } from "../../assets"
 
 export const HeroImg = () => {
 
-
     return (
         <div className="relative w-fit h-fit my-4 p-5 scale-90 rotate-1 mx-auto">
             <img draggable={ false } className='tableSvg' src={ table } alt="table" />
