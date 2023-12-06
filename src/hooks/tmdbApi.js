@@ -24,20 +24,6 @@ export const getTMDbRequestToken = async () => {
     }
 };
 
-const fetchMoviesCategory = ({ queryKey }) => {
-    const [_primaryKey, category] = queryKey
-    return request({ url: category })
-}
-
-export const useMoviesCategory = (category) => {
-    // const queryClient = useQueryClient()
-
-    return useQuery({
-        queryKey: ["movies", category],
-        queryFn: fetchMoviesCategory,
-    })
-}
-
 const fetchVideos = ({ queryKey }) => {
     const url = queryKey.join('/') + '/videos'
     return request({ url })
@@ -50,35 +36,20 @@ export const useVideosData = (movie_id) => {
     })
 }
 
-const fetchTrendingData = ({ queryKey }) => request({ url: queryKey.join('/') })
-export const useTrendingData = () => {
-    const [timeWindow, _setTimeWindow, handleTimeWindowChange] = useCyclicState(['day', 'week'])
-
-    const trendingData = useQuery({
-        queryKey: ["trending", "all", timeWindow],
-        queryFn: fetchTrendingData,
-        staleTime: 10 * 3600 * 1000,
-        refetchOnWindowFocus: false,
-    })
-
-    return { ...trendingData, handleTimeWindowChange }
-}
-
 const fetchMovies = ({ queryKey }) => request({ url: queryKey.join('/') })
 
-
 export const useMoviesData = (queryKey) => {
-    const [timeWindow, _setTimeWindow, handleTimeWindowChange] = useCyclicState(['day', 'week'])
+    const [timeWindow, setTimeWindow, handleTimeWindowChange] = useCyclicState(['day', 'week'])
 
     if (queryKey.includes('trending')) {
         const moviesData = useQuery({
             queryKey: [...queryKey, timeWindow],
-            queryFn: fetchTrendingData,
+            queryFn: fetchMovies,
             staleTime: 10 * 3600 * 1000,
             refetchOnWindowFocus: false,
         })
 
-        return { ...moviesData, handleTimeWindowChange }
+        return { ...moviesData, timeWindow, setTimeWindow }
     } else {
         return useQuery({
             queryKey,

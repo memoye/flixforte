@@ -5,14 +5,14 @@ const homePageSections = [
         title: "Trending",
         queryKey: ["trending", "all"],
     },
-    {
-        title: "Popular Movies",
-        queryKey: ["discover", "movie"]
-    },
-    {
-        title: "Popular TV Series",
-        queryKey: ["discover", "tv"]
-    }
+    // {
+    //     title: "Popular Movies",
+    //     queryKey: ["discover", "movie"]
+    // },
+    // {
+    //     title: "",
+    //     queryKey: ["discover", "tv"]
+    // }
 ]
 
 export const HomePage = () => {

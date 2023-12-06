@@ -6,53 +6,8 @@ import { Rating } from "../user_interactions/rating"
 import { ImageModal, TrailerModal } from "../modal"
 import AddToList from "./AddToList";
 
-const sample = [{
-    "adult": false,
-    "backdrop_path": "/zIYROrkHJPYB3VTiW1L9QVgaQO.jpg",
-    "id": 897087,
-    "title": "Freelance",
-    "original_language": "en",
-    "original_title": "Freelance",
-    "overview": "An ex-special forces operative takes a job to provide security for a journalist as she interviews a dictator, but a military coup breaks out in the middle of the interview, they are forced to escape into the jungle where they must survive.",
-    "poster_path": "/7Bd4EUOqQDKZXA6Od5gkfzRNb0.jpg",
-    "media_type": "movie",
-    "genre_ids": [
-        28,
-        35
-    ],
-    "popularity": 104.793,
-    "release_date": "2023-10-05",
-    "video": false,
-    "vote_average": 6.897,
-    "vote_count": 68
-},
-{
-    "adult": false,
-    "backdrop_path": "/vcFW09U4834DyFOeRZpsx9x1D3S.jpg",
-    "id": 57243,
-    "name": "Doctor Who",
-    "original_language": "en",
-    "original_name": "Doctor Who",
-    "overview": "The Doctor is a Time Lord: a 900 year old alien with 2 hearts, part of a gifted civilization who mastered time travel. The Doctor saves planets for a living—more of a hobby actually, and the Doctor's very, very good at it.",
-    "poster_path": "/8n8bF1hPICIYC4byBj0pqNn9vXs.jpg",
-    "media_type": "tv",
-    "genre_ids": [
-        10759,
-        18,
-        10765
-    ],
-    "popularity": 750.33,
-    "first_air_date": "2005-03-26",
-    "vote_average": 7.5,
-    "vote_count": 2696,
-    "origin_country": [
-        "GB"
-    ]
-},
-]
-
 export const Card = ({ id, media_type, name, adult, backdrop_path, genre_ids, original_language, original_title, overview, popularity, poster_path, release_date, title, video, vote_average, vote_count, first_air_date }) => {
-    const comingSoon = !isReleased(release_date)
+    // const comingSoon = isReleased(release_date || first_air_date)
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const { truncated, str: dispTitle } = truncateString(title || name)
     const date = formatDate(release_date || first_air_date)
@@ -67,8 +22,9 @@ export const Card = ({ id, media_type, name, adult, backdrop_path, genre_ids, or
     }
 
     return (
-        <div className={ `relative m-auto mb-2 max-w-[200px] rounded-box min-h-[346px]` } title={ truncated && (title || name) }>
+        <div className={ `relative m-auto mb-2 max-w-[200px] rounded-box min-h-[346px]` } title={ truncated ? (title || name) : '' }>
             <div className={ `absolute inset-0 backdrop-blur-md rounded-box z-10 ${!dropdownOpen && "hidden"}` } onClick={ handleDropdown } />
+            {/* { comingSoon && <div className={ `absolute bg-warning text-warning-content px-2 uppercase bottom-0 rounded-box z-10` } >Coming soon!</div> } */ }
 
             <div className={ `absolute dropdown dropdown-end top-4 right-4 z-10 ${dropdownOpen && "dropdown-open"}` }>
                 <div role="button" className="btn btn-sm btn-circle hover:bg-warning/75 hover:text-warning-content text-lg" onClick={ handleDropdown }>
