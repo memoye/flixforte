@@ -3,13 +3,13 @@ import {
     RouterProvider,
 } from "react-router-dom"
 
-import Root from "../root"
+import App from "../App"
 import { Account, HomePage, MoviesPage, SeriesPage, SignInPage } from "../pages"
 
 const routes = createBrowserRouter([
     {
         path: "/",
-        element: <Root />,
+        element: <App />,
         children: [
             {
                 index: true,
